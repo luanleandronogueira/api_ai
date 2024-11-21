@@ -9,3 +9,6 @@ class User(models.Model):
     
     def _str_(self):
         return f'Nickname: {self.user_nickname} | E-mail: {self.user_email}'
+    
+class Pergunta(models.Model):
+    user_pergunta = models.CharField(max_length=100)
