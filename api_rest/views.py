@@ -63,20 +63,27 @@ def ask_question_template(resquest, pergunta):
         return Response({'Resposta': resposta.content}, status=200)
     
 @api_view(['GET'])
-def search_page(request):
+def search_page(request, pergunta):
     chat = ChatGroq(model='llama3-groq-70b-8192-tool-use-preview')
-    loader = WebBaseLoader('http://app.camarabrejao.pe.gov.br/transparenciaMunicipal/carregaPortalCM.aspx?ID=27&e=C')
+    loader = WebBaseLoader('https://bomjardim.pe.leg.br/API_pontomobile/index.html')
     dados_extraidos = loader.load()
-    doc_html = ''
+    documentos = ''
     for doc in dados_extraidos:
-        doc_html += doc.page_content
-        
-    template = ChatPromptTemplate.from_messages([
-        ('system', 'Você é um especialista em pesquisa e procura de dados e sempre responde em português brasil de forma educada e amigável'),
-        ('user', 'Onde vejo as licitações?')
-    ])
+        documentos = documentos + doc.page_content
 
+    template = ChatPromptTemplate.from_messages([
+        ("system", "Você é um assitente amigável chamado itAI e tem acesso as seguintes informações para dar as suas respostas: {documentos_informados}"),
+        ("user", "{input}")
+    ])
+     
     chain = template | chat
-    resposta = chain.invoke({'documentos informados' : doc_html})
-    return Response({'Resposta': resposta.content}, status=200)    
+    # resposta = chain.invoke({'documentos_informados' : documentos, 'input' : pergunta})
+    documentos = documentos[:4000]
+    try:
+        resposta = chain.invoke({'documentos_informados': documentos, 'input': pergunta})
+        return Response({'Resposta': resposta.content}, status=200)
+    except Exception as e:
+        return Response({'Erro': str(e)}, status=500)
+
+   
 
