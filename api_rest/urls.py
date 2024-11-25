@@ -9,5 +9,7 @@ urlpatterns = [
     path('ai/<str:pergunta>', views.ask_question, name='ask_question'),
     path('template/<str:pergunta>', views.ask_question_template, name='ask_question_template'),
     path('search/<str:pergunta>', views.search_page, name='search_page'),
-    path('search_legislativo/<str:pergunta>', views.search_legislativo, name='search_legislativo'),
+    path('gestao/<str:pergunta>', views.gestao, name='gestao'),
+    path('rh/<str:pergunta>', views.rh, name='rh'),
+    path('planejamento/<str:pergunta>', views.planejamento, name='planejamento'),
 ]
