@@ -16,7 +16,7 @@ api_key = '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'
 os.environ['GROQ_API_KEY'] = api_key
 chat = ChatGroq(model='llama3-groq-70b-8192-tool-use-preview') # modelo do LLama que está sendo usando
 
-#  Rota Index
+#  Rota Index inicial
 def index(request):
     return render(request, 'temp/index.html')
 
