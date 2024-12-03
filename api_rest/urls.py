@@ -10,6 +10,8 @@ urlpatterns = [
     path('pergunta_especifica/<str:pergunta>', views.pergunta_especifica, name='pergunta_especifica'),
     
     # ======================================== ENDPOINTS LEGISLATIVOS ================================================
+    path('menu_completo_api_id/menu_completo/<int:id>/<str:pergunta>', views.menu_completo_api_id, name='menu_completo_api_id'),
+    path('menu_completo/menu_completo/<int:id>/<str:pergunta>', views.menu_completo, name='menu_completo'),
     path('gestao_api_id/gestao/<int:id>/<str:pergunta>', views.gestao_api_id, name='gestao_api_id'),
     path('receitas_despesas_api_id/receitas_despesas/<int:id>/<str:pergunta>', views.receitas_despesas_api_id, name='receitas_despesas_api_id'),
     path('planejamento_api_id/planejamento/<int:id>/<str:pergunta>', views.planejamento_api_id, name='planejamento_api_id'),

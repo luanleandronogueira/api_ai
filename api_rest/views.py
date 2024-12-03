@@ -9,12 +9,96 @@ from .serializes import UserSerializer
 from langchain_groq import ChatGroq
 from langchain.prompts import ChatPromptTemplate
 from langchain_community.document_loaders import WebBaseLoader
+import spacy
 import json
 
 # Chave da API
 api_key = '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'
 os.environ['GROQ_API_KEY'] = api_key
 chat = ChatGroq(model='llama3-groq-70b-8192-tool-use-preview') # modelo do LLama que está sendo usando
+
+# Temas que serão pesquisados
+Temas = {
+    "gestão": "temp/gestao.html",
+    "finanças": "temp/gestao.html",
+    "audiência pública": "temp/gestao.html",
+    "carta de serviços": "temp/gestao.html",
+    "estrutura organizacional": "temp/gestao.html",
+    "dados abertos": "temp/demais_atos.html",
+    "informações sigilosas": "temp/gestao.html",
+    "editais e concursos": "temp/gestao.html",
+    "consulta do duodécimo": "temp/receitas_despesas.html",
+    "receitas extraorçamentárias": "temp/receitas_despesas.html",
+    "despesas consolidadas": "temp/receitas_despesas.html",
+    "despesas detalhadas": "temp/receitas_despesas.html",
+    "orçamento público": "temp/receitas_despesas.html",
+    "controle interno": "temp/receitas_despesas.html",
+    "transparência": "temp/receitas_despesas.html",
+    "planejamento estratégico": "temp/gestao.html",
+    "responsabilidade fiscal": "temp/receitas_despesas.html",
+    "políticas públicas": "temp/demais_atos.html",
+    "relatórios financeiros": "temp/relatorios.html",
+    "licitações": "temp/gestao.html",
+    "contratos": "temp/gestao.html",
+    "recursos humanos": "temp/rh.html",
+    "salário": "temp/rh.html",
+    "pagamento": "temp/rh.html",
+    "despesas": "temp/receitas_despesas.html",
+    "pauta": "temp/gestao.html",
+    "atas": "temp/gestao.html",
+    "sessões": "temp/gestao.html",
+    "leis": "temp/demais_atos.html",
+    "lei": "temp/demais_atos.html",
+    "atricom": "temp/demais_atos.html",
+    "obras": "temp/demais_atos.html",
+    "decretos": "temp/demais_atos.html"
+}
+
+# Função que identifica o tema
+def identificar_tema(pergunta):
+    nlp = spacy.load("pt_core_news_sm")
+    doc = nlp(pergunta.lower())
+    
+    for token in doc:
+        if token.lemma_ in Temas:
+            return token.lemma_
+    return None
+
+@api_view(['GET'])
+def menu_completo(request, id, pergunta):
+    # Inicializa o modelo
+    chat = ChatGroq(model='llama-3.2-11b-vision-preview')
+    
+    # Identifica o tema com base na pergunta
+    tema = identificar_tema(pergunta)
+    
+    if tema and tema in Temas:
+        template_correto = Temas[tema]
+    else:
+        return Response({'Erro': 'Tema não identificado na pergunta.'}, status=400)
+    
+    
+    # Carrega o HTML baseado no endpoint identificado
+    html = render_to_string(template_correto, {'id': id})
+
+    # Configura o template de prompt para o ChatGroq
+    template = ChatPromptTemplate.from_messages([
+        ("system", "Você é um assistente chamado itAI, responsável por buscar informações dentro de documentos HTML. Sua tarefa é analisar as informações contidas no documento e fornecer um passo a passo claro e detalhado para ajudar o usuário a localizar as informações desejadas. Instruções: 1. Analise o documento HTML para identificar o conteúdo relevante, incluindo títulos, descrições e links. 2. Organize o conteúdo em um formato de passo a passo que oriente o usuário de forma clara sobre como encontrar as informações. - Cada passo deve ser uma instrução simples e direta. - Inclua o texto do link (se disponível) e o endereço literal do atributo `href`. - Adicione descrições úteis para contextualizar cada passo. Formato da Resposta: 1. Passo [Número]: [Descrição clara do que o usuário deve fazer]. - Link: [Texto do link]. Regras Adicionais: - Se não houver links ou informações claras no documento HTML, informe ao usuário que os dados não estão disponíveis no formato esperado. - Sempre siga a sequência lógica do documento HTML para apresentar os passos de forma organizada. - Use títulos e descrições dos elementos HTML como contexto adicional, caso estejam presentes. - Certifique-se de que os passos sejam fáceis de entender e executar. e tem acesso as seguintes informações para dar as suas respostas: {template_correto}"),
+    ("user", "{input}")
+    ])
+
+    chain = template | chat
+
+    # Limita o HTML para evitar excesso de caracteres
+    html = html[:4000]
+
+    # Tenta gerar a resposta
+    try:
+        resposta = chain.invoke({'template_correto': html, 'input': pergunta})
+        return Response({'Resposta': resposta.content}, status=200)
+    except Exception as e:
+        return Response({'Erro': str(e)}, status=500)
+    
 
 #  Rota Index inicial
 def index(request):
@@ -49,6 +133,26 @@ def pergunta_aberta(resquest, pergunta):
     if resquest.method == 'GET':
         resposta = chat.invoke(pergunta)
         return Response({'Resposta': resposta.content}, status=200)
+
+@api_view(['GET'])
+def menu_completo_api_id(request, id, pergunta):
+    chat = ChatGroq(model='llama-3.2-11b-vision-preview')
+    html = render_to_string('temp/gestao.html', {'id':id})
+
+    template = ChatPromptTemplate.from_messages([
+        ("system", "Você é um assistente chamado itAI, responsável por buscar informações dentro de documentos HTML. Sua tarefa é analisar as informações contidas no documento e fornecer um passo a passo claro e detalhado para ajudar o usuário a localizar as informações desejadas. Instruções: 1. Analise o documento HTML para identificar o conteúdo relevante, incluindo títulos, descrições e links. 2. Organize o conteúdo em um formato de passo a passo que oriente o usuário de forma clara sobre como encontrar as informações. - Cada passo deve ser uma instrução simples e direta. - Inclua o texto do link (se disponível) e o endereço literal do atributo `href`. - Adicione descrições úteis para contextualizar cada passo. Formato da Resposta: 1. Passo [Número]: [Descrição clara do que o usuário deve fazer]. - Link: [Texto do link]. Regras Adicionais: - Se não houver links ou informações claras no documento HTML, informe ao usuário que os dados não estão disponíveis no formato esperado. - Sempre siga a sequência lógica do documento HTML para apresentar os passos de forma organizada. - Use títulos e descrições dos elementos HTML como contexto adicional, caso estejam presentes. - Certifique-se de que os passos sejam fáceis de entender e executar. e tem acesso as seguintes informações para dar as suas respostas: {documentos_informados}"),
+    ("user", "{input}")
+    ])
+     
+    chain = template | chat
+
+    html = html[:15000]
+    
+    try:
+        resposta = chain.invoke({'documentos_informados': html, 'input': pergunta})
+        return Response({'Resposta': resposta.content}, status=200)
+    except Exception as e:
+        return Response({'Erro': str(e)}, status=500)
 
 # Menu Gestão
 @api_view(['GET'])
@@ -199,3 +303,4 @@ def legislativo_api_id(request, id, pergunta):
 
 
        
+
