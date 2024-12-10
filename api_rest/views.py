@@ -51,7 +51,11 @@ Temas = {
     "lei": "temp/demais_atos.html",
     "atricom": "temp/demais_atos.html",
     "obras": "temp/demais_atos.html",
-    "decretos": "temp/demais_atos.html"
+    "decretos": "temp/demais_atos.html",
+    "somos": "temp/gestao.html",
+    "você": "temp/gestao.html",
+    "conhecimento": "temp/gestao.html",
+    "fale": "temp/gestao.html",
 }
 
 # Função que identifica o tema
@@ -125,7 +129,21 @@ def pergunta_especifica(resquest, pergunta):
         
         resposta = chain.invoke(pergunta)
         return Response({'Resposta': resposta.content}, status=200)
-    
+
+# Identificar sentido e palavra chave da pergunta
+@api_view(['GET'])
+def identifica_sentido(resquest, pergunta):
+    chat = ChatGroq(model='llama3-groq-70b-8192-tool-use-preview')
+    if resquest.method == 'GET':
+        template = ChatPromptTemplate.from_messages(
+            [ ('system', 'Você é um especialista em gestão pública, com foco em transparência, finanças públicas e legislação municipal. Sua tarefa é analisar a frase fornecida pelo usuário e identificar a palavra ou palavras-chave que melhor descrevem o que o usuário deseja saber. Responda com clareza e concisão, retornando apenas a palavra-chave principal ou um conjunto de palavras relacionadas diretamente ao tema da frase. Não explique sua escolha, apenas forneça as palavras-chave. Exemplos: Entrada: "Quero ver os salários" Resposta: "salários". Entrada: "Quero saber onde ficam os contratos". Resposta: "contratos" Agora, identifique a palavra-chave da frase fornecida'),
+              ('user', ' {pergunta}')]
+        )
+        chain = template | chat
+        
+        resposta = chain.invoke(pergunta)
+        return Response({'Resposta': resposta.content}, status=200)
+   
 # Qualquer pergunta pode ser feita
 @api_view(['GET'])
 def pergunta_aberta(resquest, pergunta):

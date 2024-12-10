@@ -8,6 +8,7 @@ urlpatterns = [
     # Perguntas Abertas
     path('pergunta_aberta/<str:pergunta>', views.pergunta_aberta, name='pergunta_aberta'),
     path('pergunta_especifica/<str:pergunta>', views.pergunta_especifica, name='pergunta_especifica'),
+    path('identifica_sentido/<str:pergunta>', views.identifica_sentido, name='identifica_sentido'),
     
     # ======================================== ENDPOINTS LEGISLATIVOS ================================================
     path('menu_completo_api_id/menu_completo/<int:id>/<str:pergunta>', views.menu_completo_api_id, name='menu_completo_api_id'),
