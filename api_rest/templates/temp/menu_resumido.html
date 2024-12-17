@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Transparência Legistaliva</title>
+</head>
+<body>
+<header>
+{% if id == 45 %}
+<h1>Portal da Transparência - Câmara Angelim</h1>
+{% elif id == 34 %}
+<h1>Portal da Transparência - Câmara Garanhuns</h1>
+{% elif id == 54 %}
+<h1>Portal da Transparência - Câmara Bom Conselho</h1>
+{% elif id == 63 %}
+<h1>Portal da Transparência - Câmara Bom Jardim</h1>
+{% elif id == 27 %}
+<h1>Portal da Transparência - Câmara Brejão</h1>
+{% elif id == 56 %}
+<h1>Portal da Transparência - Câmara Canhotinho</h1>
+{% elif id == 25 %}
+<h1>Portal da Transparência - Câmara Correntes</h1>
+{% elif id == 46 %}
+<h1>Portal da Transparência - Câmara Iguaracy</h1>
+{% elif id == 54 %}
+<h1>Portal da Transparência - Câmara Bom Conselho</h1>
+{% elif id == 26 %}
+<h1>Portal da Transparência - Câmara Ingazeira</h1>
+{% elif id == 55 %}
+<h1>Portal da Transparência - Câmara Jaqueira</h1>
+{% elif id == 8 %}
+<h1>Portal da Transparência - Câmara Jucati</h1>
+{% elif id == 33 %}
+<h1>Portal da Transparência - Câmara Quipapá</h1>
+{% elif id == 59 %}
+<h1>Portal da Transparência - Câmara Tabira</h1>
+{% elif id == 61 %}
+<h1>Portal da Transparência - Câmara Tuparetama</h1>
+{% endif %}
+<p>
+  Bem-vindo ao Portal da Transparência! Aqui você encontrará instruções
+  detalhadas e os caminhos para acessar informações importantes
+  referentes à nossa instituição.
+</p>
+</header>
+<h2>Endereço Principal do Site</h2>
+<p>O portal da Transparência pode ser acessado no seguinte endereçoprincipal:<a href="{{link}}/carregaPortalCM.aspx?ID={{id}}&e=C"title="Acesse o portal da Transparência da instituição">{{link}}/carregaPortalCM.aspx?ID={{id}}&e=C</a>.
+</p>
+<main>
+<ul>
+<section aria-label="Sessão - Gestão">
+  <h2>Sessão - Gestão</h2>
+  <p>A sessão Gestão oferece informações detalhadas sobre a administração e gestão pública, com acesso aos seguintes itens:</p>
+  <ul><li><a href="{{link}}/retornadadosVisualizacao.aspx?sessao=AUP&ID={{id}}&e=C" aria-label="Audiência Pública"  title="Visualizar informações sobre Audiência Pública">  Audiência Pública</a></li><li><a href="{{link}}/frmCartaServico.aspx?ID={{id}}&e=C" aria-label="Acesse a Carta de Serviços disponíveis para o público"  title="Acesse a Carta de Serviços disponíveis para o público"> Carta de Serviços</a></li><li><a href="{{link}}/estruturaOrganizacional.aspx?ID={{id}}&e=C" aria-label="Visualizar informações sobre Competências e Estrutura Organizacional"  title="Visualizar informações sobre Competências e Estrutura Organizacional">  Competências e Estrutura Organizacional</a></li><li><a aria-label="Visualizar e acessar dados disponíveis via API" href="{{link}}/frmDadosAberto.aspx?ID={{id}}&e=C"  title="Visualizar e acessar dados disponíveis via API">  Dados Abertos</a></li><li><a href="{{link}}/frmInformacoesClassificadasSigilo.aspx?ID={{id}}&e=C" aria-label="Informações sigilosas classificadas para acesso restrito"  title="Informações sigilosas classificadas para acesso restrito">  Informações Sigilosas</a></li><li><a href="{{link}}/retornadadosVisualizacao.aspx?sessao=ecs&ID={{id}}&e=C" aria-label="Visualizar Editais de Concurso ou Seleção Pública" title="Visualizar Editais de Concurso ou Seleção Pública">  Edital de Concurso/Seleção Pública</a></li>
+</section>
+
+<section aria-label="Sessão - Classificação da Receita e Despesa">
+  <h2>Sessão - Classificação da Receita e Despesa</h2>
+  <p>A classificação da receita e da despesa tem como objetivo identificaro fato econômico que ocasionou o ingresso ou a saída de recursos noscofres públicos. As receitas e despesas podem ser agrupadas em duascategorias econômicas: Correntes e de Capital.
+  </p>
+  <ul><li><a href="{{link}}/consultaDuodecimo.aspx?ID={{id}}&e=C"title="Informações detalhadas sobre o duodécimo orçamentário e repasses financeiros obrigatórios ao Poder Legislativo, conforme a Constituição Federal, artigo 168.">Consulta duodécimo / Repasse Financeiro</a></li><li><a href="{{link}}/consultaReceitaExtra.aspx?ID={{id}}&e=C"title="Informações sobre receitas extra orçamentárias, recursos que não transitam pelo orçamento público e não constituem renda do Estado."aria-label="São todos os recursos recebidos que não transitam pelo orçamento público, como cauções depositadas como garantia para execução de contratos.">Receita Extra Orçamentária</a></li><li><a href="{{link}}/consultaDespesaConsolidada.aspx?ID={{id}}&e=C&ano=2024"aria-label="Despesa consolidada pode referir-se a:O saldo devedor de débitos de um mesmo tributo, acrescido de juros e multas, calculados até a data da negociação do parcelamento. O montante total das obrigações financeiras de um ente da Federação, como a União, os Estados, o Distrito Federal ou os Municípios. Um processo financeiro que consiste em unificar várias dívidas em um único pagamento. O crédito consolidado pode ser uma forma de melhorar a gestão financeira e resolver o endividamento. Ao juntar todos os débitos em um só, com uma única data de vencimento, pode-se facilitar o dia a dia e diminuir a quantia de juros pagos"title="Despesa Consolidada">Despesa Consolidada</a></li><li><a href="{{link}}/consultaDespesaOrcamentariaAgrupada.aspx?ID={{id}}&e=C"aria-label="Todas despesas com todos os detalhes delas"title="Despesa Detalhada">Despesa Detalhada</a></li><li><a href="{{link}}/consultaDespesaExtra.aspx?ID={{id}}&e=C"title="Despesa Extra Orçamentária"aria-label="Despesa extra-orçamentária é um pagamento que não depende de autorização legislativa, ou seja, não está incluído no orçamento público. Alguns exemplos de despesas extra-orçamentárias são: Devolução de cauções, Resgate de operações de crédito por antecipação de receita orçamentária, Pagamento de restos a pagar, Pagamento de consignações. As despesas orçamentárias são despesas públicas que dependem de autorização legislativa para serem realizadas">Despesa Extra Orçamentária</a></li><li><a href="{{link}}/frmRestosInscritos.aspx?ID={{id}}&e=C"title="Restos a Pagar"aria-label="Restos a Pagar, são as despesas em aberto para pagamento">Restos a Pagar</a></li><li><a href="{{link}}/consultaGastos.aspx?ID={{id}}&e=C&T=14"title="Gasto com Diárias"aria-label="As diárias são pagas a servidores e vereadores para participar de reuniões, cursos, consultas ao tribunal de contas e outras situações em que representem o Legislativo. Para atestar a legalidade do pagamento de diárias, a Administração deve comprovar a viagem que resultou no pagamento. Para isso, pode utilizar-se de relatório, acompanhado de cópia de livro de presença e da ata da reunião.">Gasto com Diárias</a></li><li><a href="{{link}}/consultaGastos.aspx?ID={{id}}&e=C&T=33"title="Gasto com Passagens"aria-label="Gasto com Passagens">Gasto com Passagens</a></li><li><a href=""title="Compra/Contratação Direta">Compra/Contratação Direta</a></li><li><a href="{{link}}/retornaDadosVisualizacao.aspx?sessao=qdd&ID={{id}}&e=C"title="Quadro Detalhamento da Despesa"aria-label="O Quadro de Detalhamento da Despesa (QDD) é um relatório que pode ser encontrado no menu SIAF, em Relatórios, Despesa, Consulta QDDs.">Quadro Detalhamento da Despesa</a></li><li><a href="{{link}}/frmOrdemCronologicaPgtMesal.aspx?ID={{id}}&e=C"title="Ordem Cronológica dos Pagamentos"aria-label="A ordem cronológica de pagamentos é um princípio que determina que as obrigações devem ser pagas de acordo com a data de exigibilidade, ou seja, a data de liquidação da despesa ou a prevista no contrato. ">Ordem Cronológica dos Pagamentos</a></li>
+  </ul>
+</section>
+<section aria-label="Sessão - Licitações e Contratos">
+  <h2>Sessão - Licitações e Contratos</h2>
+  <p>Licitações são procedimentos utilizados pelo governo para selecionar aproposta mais vantajosa para a aquisição de bens ou a contratação deserviços, conforme as regras estabelecidas pela Lei Federal nº 8.666,de 1993. Abaixo estão informações detalhadas sobre licitações econtratos relacionados.</p>
+  <ul><li><a href="{{link}}/frmAvisoLicitacao.aspx?ID={{id}}"title="Acesse os avisos de licitação e os editais disponíveis para consulta" aria-label="O aviso de licitação é um resumo do edital de licitação, enquanto o edital é o ato convocatório que estabelece as condições para a participação no processo licitatório: Aviso de licitação É um extrato que contém informações como o objeto da licitação, a modalidade, a data e hora da sessão, e o local onde o edital completo pode ser obtido. Edital de licitação É o documento que estabelece as condições para a participação no processo licitatório, incluindo o objeto da licitação, as garantias e os deveres das partes envolvidas.">Aviso de Licitação e Edital</a></li><li><a href="{{link}}/frmConsultaContrato.aspx?ID={{id}}&e=C"title="Informações sobre contratos firmados e seus respectivos aditivos" aria-label="Um aditivo de contrato é um documento legal que modifica, acrescenta ou remove cláusulas de um contrato original. Ele é criado e assinado pelas partes envolvidas, e tem a mesma importância que o contrato original.">Contrato e Aditivos</a></li><li><a href="{{link}}/retornaDadosLicitacao.aspx?ID={{id}}&e=C"title="Consulta detalhada sobre os processos licitatórios em andamento ou finalizados"aria-label="Um processo licitatório é um procedimento administrativo e isonômico que visa selecionar a proposta mais vantajosa para a contratação de serviços, obras, produtos, locação ou alienação. As fases de um processo licitatório são: Preparatória Divulgação do edital Apresentação de propostas e lances Julgamento Habilitação Recursal Homologação  As modalidades de licitação no Brasil são: Concorrência, Tomada de preços, Convite, Concurso, Leilão, Pregão.">Processos Licitatórios</a></li><li><a href="{{link}}/retornaDadosVisualizacao.aspx?sessao=plca&ID={{id}}&e=C"title="Plano de Contratação Anual com previsões de aquisições e serviços"aria-label="O Plano de Contratação Anual (PCA) é um documento que reúne todas as compras e contratações que uma entidade ou órgão pretende realizar ou prorrogar no ano seguinte. O PCA é uma ferramenta de planejamento estratégico que abrange bens, obras, serviços e soluções de tecnologia da informação.">Plano de Contratação Anual</a></li><li><a href="{{link}}/retornaDadosVisualizacao.aspx?sessao=lcs&ID={{id}}&e=C"title="Lista de licitantes sancionados ou punidos em processos licitatórios"aria-label="Licitantes e contratados podem ser punidos com sanções administrativas em caso de infrações">Licitantes Sancionados/Punidos</a></li><li><a href="{{link}}/frmListaFiscalContrato.aspx?ID={{id}}&e=C"title="Consulta a lista de fiscais responsáveis pela gestão de contratos"aria-label="">Lista de Fiscais de Contratos</a></li>
+  </ul>
+</section>
+<section aria-label="Sessão - Transferências">
+  <h2> Sessão - Transferências</h2>
+  <p>Transferências Voluntárias Recebidas ou Realizadas</p>
+  <ul><li>  <a href="{{link}}/consultaTransferenciaVoluntaria.aspx?ID={{id}}&e=C&t_v=R" title="Transferências Voluntárias Recebidas" aria-label="Transferências Voluntárias Recebidas são recursos financeiros que uma entidade recebe de outra, a título de cooperação, auxílio ou assistência financeira, sem que isso decorra de uma determinação legal ou constitucional.">Transferências Voluntárias Recebidas</a></li><li><a href="{{link}}/consultaTransferenciaVoluntaria.aspx?ID={{id}}&e=C&t_v=E" title="Transferências Voluntárias Realizadas" aria-label="As transferências voluntárias são a entrega de recursos financeiros de uma entidade para outra, a título de cooperação, auxílio ou assistência financeira. Elas são definidas no artigo 25 da Lei de Responsabilidade Fiscal (LRF). 
+">Transferências Voluntárias Realizadas</a></li><li><a href="{{link}}/consultaTransferenciaVoluntaria.aspx?ID={{id}}&e=C&t_v=E" title="Acordos/Termo de Coperação" aria-label="O acordo de cooperação e o termo de cooperação são instrumentos jurídicos que formalizam a cooperação entre entidades públicas e privadas, com ou sem fins lucrativos." >Acordos/Termo de Coperação</a></li>
+  </ul>
+</section>
+<section aria-label="Sessão - Atos Legislativos">
+  <h2> Sessão - Atos Legislativos</h2>
+  <p>Atos legislativos são normas jurídicas elaboradas por órgãos do PoderLegislativo, de acordo com regras previamente definidas. Podem ser dediversos tipos, como leis, decretos legislativos, resoluções, entreoutros. Atos legislativos podem ser municipais, como leis ordinárias,leis complementares, decretos legislativos e resoluções. No âmbitofederal, o poder legislativo é exercido pelo Congresso Nacional,composto pela Câmara dos Deputados e pelo Senado Federal.
+  </p>
+  <ul><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar as atas das reuniões plenárias" aria-label="Consultar as atas das reuniões realizadas no plenário.">Atas das Reuniões Plenário</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar a ata da votação nominal" aria-label="Consultar a ata da votação nominal realizada." >Ata de Votação Nominal</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar informações sobre as cotas para exercício da atividade parlamentar" aria-label="Verificar as cotas e verbas indenizatórias destinadas aos parlamentares." >Cotas Exercício Atividade Parlamentar/Verba Indenizatória</a></li><li> <a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar os decretos publicados" aria-label="Consultar os decretos publicados." >Decretos</a></li><li>  <a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar os resultados do julgamento das contas do executivo" aria-label="Verificar os resultados do julgamento das contas do executivo." >Julgamento das Contas do Executivo</a></li><li>  <a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar a legislação relacionada aos gastos dos parlamentares" aria-label="Consultar a legislação que regulamenta os gastos dos parlamentares." >Legislação Relacionada a Gastos dos Parlamentares</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar a pauta das reuniões das comissões" aria-label="Consultar a pauta das reuniões das comissões." >Pauta Reunião das Comissões</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar a pauta das sessões plenárias" aria-label="Consultar a pauta das sessões plenárias." >Pauta Sessões do Plenário</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar as leis municipais" aria-label="Consultar as leis municipais em vigor." >Leis Municipais</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar a lista de presença e ausência nas sessões" aria-label="Consultar a lista de presença e ausência dos parlamentares nas sessões." >Lista de Presença/Ausência nas Sessões</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar as portarias publicadas" aria-label="Consultar as portarias publicadas.">Portarias</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar os projetos de lei e resoluções" aria-label="Consultar os projetos de lei e resoluções em tramitação." >Projeto de Lei e Resoluções</a></li><li><a href="{{link}}/carregaSessaoLegislativo.aspx?ID=34&e=C" title="Acessar o relatório de atividade dos parlamentares" aria-label="Consultar o relatório de atividades dos parlamentares." >Relatório Atividade dos Parlamentares</a></li>
+  </ul>
+</section>
+<section aria-label="Sessão - Recursos Humanos">
+  <h2> Sessão RH - Recursos Humanos</h2>
+  <p>O setor de Recursos Humanos (RH) é responsável por gerir os colaboradores de uma empresa, desde a admissão até a demissão. O RH é uma peça-chave no desenvolvimento do capital humano da empresa, pois utiliza softwares de gestão e análise de dados para alinhar os talentos com os objetivos e cultura da organização. Pode ser encontrado a remuneração salarial e os salários dos servidores</p>
+    <ul>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar o quadro funcional" aria-label="Consultar o quadro de funcionários da instituição.">Quadro Funcional</a></li>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar a relação nominal dos servidores" aria-label="Visualizar a lista nominal completa dos servidores.">Relação nominal dos servidores</a></li>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar a tabela de remuneração individualizada" aria-label="Consultar a tabela de remuneração individualizada de cada servidor.">Remuneração Individualizada</a></li>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar a tabela remuneratória/salarios dos cargos" aria-label="Consultar a tabela que define a remuneração/salários por cargo.">Tabela Remuneratória dos Cargos</a></li>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar a lista de estagiários" aria-label="Visualizar a lista completa dos estagiários.">Lista dos Estagiários</a></li>
+<li><a href="{{link}}frmServidores.aspx?ID={{id}}&e=C" title="Acessar a lista de terceirizados" aria-label="Visualizar a lista completa dos terceirizados.">Lista dos Terceirizados</a></li>
+<li><a href="{{link}}retornaDadosVisualizacao.aspx?sessao=ecs&ID={{id}}&e=C" title="Acessar os editais de concursos e seleções públicas" aria-label="Consultar os editais de concursos e seleções públicas.">Editais de concursos/seleções públicas</a></li>
+<li><a href="{{link}}retornaDadosVisualizacao.aspx?sessao=ecs&ID={{id}}&e=C" title="Acessar demais atos de concursos e processos seletivos" aria-label="Visualizar outros atos relacionados a concursos e processos seletivos.">Demais atos concursos/processos seletivos</a></li>
+</ul>
+</section>
+</ul>
+</main>
+</body>
+</html>

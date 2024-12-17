@@ -102,7 +102,6 @@ def menu_completo(request, id, pergunta):
         return Response({'Resposta': resposta.content}, status=200)
     except Exception as e:
         return Response({'Erro': str(e)}, status=500)
-    
 
 #  Rota Index inicial
 def index(request):
@@ -155,16 +154,20 @@ def pergunta_aberta(resquest, pergunta):
 @api_view(['GET'])
 def menu_completo_api_id(request, id, pergunta):
     chat = ChatGroq(model='llama-3.2-11b-vision-preview')
-    html = render_to_string('temp/gestao.html', {'id':id})
+    context = {
+        'id': id,
+        'link': 'https://it-solucoes.com/transparenciaMunicipal/'
+    }
+    html = render_to_string('temp/menu_resumido.html', context)
 
     template = ChatPromptTemplate.from_messages([
-        ("system", "Você é um assistente chamado itAI, responsável por buscar informações dentro de documentos HTML. Sua tarefa é analisar as informações contidas no documento e fornecer um passo a passo claro e detalhado para ajudar o usuário a localizar as informações desejadas. Instruções: 1. Analise o documento HTML para identificar o conteúdo relevante, incluindo títulos, descrições e links. 2. Organize o conteúdo em um formato de passo a passo que oriente o usuário de forma clara sobre como encontrar as informações. - Cada passo deve ser uma instrução simples e direta. - Inclua o texto do link (se disponível) e o endereço literal do atributo `href`. - Adicione descrições úteis para contextualizar cada passo. Formato da Resposta: 1. Passo [Número]: [Descrição clara do que o usuário deve fazer]. - Link: [Texto do link]. Regras Adicionais: - Se não houver links ou informações claras no documento HTML, informe ao usuário que os dados não estão disponíveis no formato esperado. - Sempre siga a sequência lógica do documento HTML para apresentar os passos de forma organizada. - Use títulos e descrições dos elementos HTML como contexto adicional, caso estejam presentes. - Certifique-se de que os passos sejam fáceis de entender e executar. e tem acesso as seguintes informações para dar as suas respostas: {documentos_informados}"),
+        ("system", "Você é um assistente chamado itAI, especializado em orientar os usuários a localizar informações em um portal com base em menus e links. Sua tarefa é responder às perguntas fornecendo um passo a passo claro e objetivo para acessar as informações desejadas. Instruções: 1. Leia atentamente a pergunta do usuário para identificar o assunto principal (ex.: remuneração, despesas, licitações). 2. Procure no documento HTML as seções e links que sejam mais relevantes ao tema identificado. 3. Organize sua resposta em um passo a passo lógico, indicando o caminho dentro do menu e o link correspondente. 4. Forneça respostas claras e diretas, sem mencionar a estrutura HTML ou termos técnicos como 'HTML' ou 'código'. Formato da Resposta: 1. Passo [Número]: [Descrição clara do que o usuário deve fazer]. - Link: [Texto do link com a URL correspondente]. Regras: - Sempre relacione diretamente a resposta ao tema da pergunta. - Utilize os títulos e descrições das seções para contextualizar as instruções. - Evite mencionar termos técnicos desnecessários ou etapas genéricas sem conexão com a pergunta. - Se não houver informações relevantes no documento, informe claramente que o dado solicitado não está disponível. E tem acesso as seguintes informações para dar as suas respostas: {documentos_informados}"),
     ("user", "{input}")
     ])
      
     chain = template | chat
 
-    html = html[:15000]
+    html = html[:20000]
     
     try:
         resposta = chain.invoke({'documentos_informados': html, 'input': pergunta})
